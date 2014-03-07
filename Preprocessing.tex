@@ -10,14 +10,14 @@ There are three main approaches to motion correction: volume realignment, using 
 \text{Volume realignment aligns reconstructed volumes by calculating motion parameters based on a solid-body model of the head and brain (Friston 1996). Based on these pareameters, each volume is registered to the volume preceeding it. CPAC runs volume realignment on all functional images during functional preprocessing. Users can select from two sets of motion parameters to use during this process:}
 
 \begin{itemize}
-    \item{\textbf{6-Parameter Model} - Three translation and three rotation parameters as described in Friston 1996.}
-    \item{\textbf{Friston 24-Parameter Model} - The 6 motion parameters of the current volume and the preceeding volume, plus each of these values squared.}
+    \item{6-Parameter Model - Three translation and three rotation parameters as described in Friston 1996.}
+    \item{Friston 24-Parameter Model - The 6 motion parameters of the current volume and the preceeding volume, plus each of these values squared.}
 \end{itemize}
 
 \subsubsection{Regression of Motion Parameters}
-\text{Another approach to motion corretion is to regress-out the effects of motion when running statistical analysis. This is done by calculating motion parameters and including them in your General Linear Model (Fox et al., 2005; Weissenbacher et al., 2009).
+\text{Another approach to motion correction is to regress-out the effects of motion, either directly from the time series (e.g. motion as a nuisance signal), or when running statistical analysis to detect group differences. This is done by calculating motion parameters and including them in a General Linear Model (Fox et al., 2005; Weissenbacher et al., 2009).
 
-By default, CPAC will calculate and output the motion parameters used during volume realignment. Users can optionally enable the calculation of additional motion parameters, including Framewise Displacement (FD) and DVARS (as described below and in Power et al., 2011).}
+By default, CPAC will include parameters calulcated during volume realignment as nuisance regressors during preprocessing. Users can optionally enable the calculation of additional motion parameters, including Framewise Displacement (FD) and DVARS (as described below and in Power et al., 2011) for use during second-level analysis.}
 
 \subsubsection{Scrubbing}
 \text{The most effective way to ensure that your results are have not been influenced by spurious, motion-related noise is to remove volumes during which significant movement occurred. This is known as volume censoring, or Scrubbing. Power and colleagues (2011) proposed two measures to identify volumes contaminated by excessive motion; framewise displacement (FD) and DVARS:}
