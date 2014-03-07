@@ -17,7 +17,7 @@ There are three main approaches to motion correction: volume realignment, using 
 \subsubsection{Regression of Motion Parameters}
 \text{Another approach to motion correction is to regress-out the effects of motion, either directly from the time series (e.g. motion as a nuisance signal), or when running statistical analysis to detect group differences. This is done by calculating motion parameters and including them in a General Linear Model (Fox et al., 2005; Weissenbacher et al., 2009).
 
-By default, CPAC will include parameters calulcated during volume realignment as nuisance regressors during preprocessing. Users can optionally enable the calculation of additional motion parameters, including Framewise Displacement (FD) and DVARS (as described below and in Power et al., 2011) for use during second-level analysis.}
+CPAC provides the option to include parameters calulcated during volume realignment as nuisance regressors during preprocessing. Users can optionally enable the calculation of additional motion parameters, including Framewise Displacement (FD) and DVARS (as described below and in Power et al., 2011) for use during second-level analysis.}
 
 \subsubsection{Scrubbing}
 \text{The most effective way to ensure that your results are have not been influenced by spurious, motion-related noise is to remove volumes during which significant movement occurred. This is known as volume censoring, or Scrubbing. Power and colleagues (2011) proposed two measures to identify volumes contaminated by excessive motion; framewise displacement (FD) and DVARS:}
