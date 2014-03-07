@@ -6,42 +6,24 @@
 \subsection{Functional Preprocessing}
 \subsubsection{Initial Preprocessing}
 \subsubsection{Slice Timing Correction}
-\text{Most fMRI images are created by combining multiple 2D slices into a single 3D volume. Slices are acquired one after another, either sequentially in ascending or descending order, or in an interleaved manner, such that every other slice is acquired in a first pass, and the remaining slices are aqcuired in a second pass. The time between the acquisition of the first and last slice depends on the TR used (e.g. 2.5 seconds for a TR of 2500ms). Slice timing correction acts to adjust the timecourse of voxels in each slice to account for these differences. This is done by interpolating the data in each slice to match the timing of a reference slice. Slice timing correction is necessary because many statistical models used for fMRI analysis assume that all voxels are measured simultaneously. As such, differences in acqusition time between slices can cause confounds. CPAC supports slice timing correction for most common slice acquisition orders, as well as simultaneous acquisitions encountered when using multi-band or multi-echo sequences.}
 \subsubsection{Volume Realignment}
 \subsubsection{Registration to Anatomical Image}
 \subsubsection{Nuisance Signal Correction}
-\text{physiological noise correction, wm/csf, gsr, motion, detrending}
 
+Functional Preprocessing \\
 
-
-
-
-\subsection{Motion Correction}
-\text{Movement during scanning is one of of the largest factors influencing the quality of fMRI data. Movement of the head between the acquisition of each volume can cause brain images to become misaligned. Head motion during scanning can also cause in spurious changes in signal intensity (spin history effects). If they are not corrected, these changes can influence the results of activation and connectivity analyses. Recent studies have shown that motion as small as 0.1mm can systematically bias both within- and between- group effects during the analysis of fMRI data (Power et al., 2011; Satterhwaite et al., 2012; Van Dijk et al., 2012). Even the most cooperative subjects often still show displacements of up to a millimeter, and head movements of several millimeters are not uncommon in studies of hyperkinetic subjects such as young children, older adults, or patient populations.
-
-There are three main approaches to motion correction: volume realignment, using a general linear model to regress out motion-related artifacts (i.e. regression of motion parameters), and censoring of motion confounded time points (i.e. “scrubbing”)}
-
-\subsubsection{Volume Realignment}
-\text{Volume realignment aligns reconstructed volumes by calculating motion parameters based on a solid-body model of the head and brain (Friston 1996). Based on these pareameters, each volume is registered to the volume preceeding it. CPAC runs volume realignment on all functional images during functional preprocessing. Users can select from two sets of motion parameters to use during this process:}
-
-\begin{itemize}
-    \item{6-Parameter Model - Three translation and three rotation parameters as described in Friston 1996.}
-    \item{Friston 24-Parameter Model - The 6 motion parameters of the current volume and the preceeding volume, plus each of these values squared.}
-\end{itemize}
-
-\subsubsection{Regression of Motion Parameters}
-\text{Another approach to motion correction is to regress-out the effects of motion, either directly from the time series (e.g. motion as a nuisance signal), or when running statistical analysis to detect group differences. This is done by calculating motion parameters and including them in a General Linear Model (Fox et al., 2005; Weissenbacher et al., 2009).
-
-CPAC provides the option to include parameters calulcated during volume realignment as nuisance regressors during preprocessing. Users can optionally enable the calculation of additional motion parameters, including Framewise Displacement (FD) and DVARS (as described below and in Power et al., 2011) for use during second-level analysis.}
-
-\subsubsection{Scrubbing}
-\text{The most effective way to ensure that your results are have not been influenced by spurious, motion-related noise is to remove volumes during which significant movement occurred. This is known as volume censoring, or Scrubbing. Power and colleagues (2011) proposed two measures to identify volumes contaminated by excessive motion; framewise displacement (FD) and DVARS:}
-\begin{itemize}
-    \item{FD is calculated from derivatives of the six rigid-body realignment parameters estimated during standard volume realignment, and is a compressed single index of the six realignment parameters.}
-    \item{DVARS is the root mean squared (RMS) change in BOLD signal from volume to volume (D referring to temporal derivative of time courses and VARS referring to RMS variance over voxels). DVARS is calculated by first differentiating the volumetric time series and then calculating the RMS signal change over the whole brain. This measure indexes the change rate of BOLD signal across the entire brain at each frame of data or, in other words, how much the intensity of a brain image changes relative to the previous time point.}
-\end{itemize}
-\text{Together, these two measures capture the head displacements and the brain-wide BOLD signal displacements from volume to volume over all voxels within the brain (Power et al., 2011).
-
-After calculating FD and DVARS, thresholds can be applied to censor the data. Selecting thresholds for Scrubbing is a trade-off. More stringent thresholds allow more complete removal of motion-contaminated data, and minimize motion-induced artifacts. Meanwhile, more stringent Scrubbing will also remove more data, which may increase the variability and decrease the test-retest reliability of the data. Commonly used thresholds are FD > 0.2 to 0.5 mm and DVARS > 0.3 to 0.5% of BOLD.
-
-IMPORTANT: Removing time points from a continuous time series (as is done during Scrubbing) disrupts the temporal structure of the data and precludes frequency-based analyses such as ALFF/fALFF. However, Scrubbing can effectively be used to minimize motion-related artifacts in seed-based correlation analyses (Power et al., 2011; 2012).}
+\begin{tabular}{| l | l | l | p{3.5cm} |}
+	\hline
+	Step & Software  & Function & Notes \\ \hline
+	Drop Volumes & AFNI & 3dcalc & optional\\ \hline
+	Slice Timing Correction & AFNI & 3dTshift & optional \\ \hline
+	Deoblique & AFNI & 3drefit & \\ \hline
+	Re-orient to RPI & AFNI & 3dresample & \\ \hline
+	Volume Realignment & AFNI & 3dvolreg & \\ \hline
+	Remove Skull  & AFNI & 3dcalc & \\ \hline
+	Intensity Normalization & FSL & fslmaths & normalized intensity = \\ & & & (intensity * 10,000) / \\ & & & global 4D mean \\ \hline
+	Register to Anatomical & FSL & FLIRT & with or without BBR \\ (linear) & & (Jenkinson \& Smith, 2001) & (Greve \& Fischl, 2009)\\ \hline
+	Register to MNI & FSL & applywarp & register to normalized \\ \cline{2-3}
+	& ANTS & WarpTimeSeriesImageMultiTransform & anatomical \\ 
+	\hline
+\end{tabular}
