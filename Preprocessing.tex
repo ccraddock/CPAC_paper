@@ -6,6 +6,7 @@
 \subsection{Functional Preprocessing}
 \subsubsection{Initial Preprocessing}
 \subsubsection{Slice Timing Correction}
+\text{Most fMRI images are created by combining multiple 2D slices into a single 3D volume. Slices are acquired one after another, either sequentially in ascending or descending order, or in an interleaved manner, such that every other slice is acquired in a first pass, and the remaining slices are aqcuired in a second pass. The time between the acquisition of the first and last slice depends on the TR used (e.g. 2.5 seconds for a TR of 2500ms). Slice timing correction acts to adjust the timecourse of voxels in each slice to account for these differences. This is done by interpolating the data in each slice to match the timing of a reference slice. Slice timing correction is necessary because many statistical models used for fMRI analysis assume that all voxels are measured simultaneously. As such, differences in acqusition time between slices can cause confounds. CPAC supports slice timing correction for most common slice acquisition orders, as well as simultaneous acquisitions encountered when using multi-band or multi-echo sequences.}
 \subsubsection{Volume Realignment}
 \subsubsection{Registration to Anatomical Image}
 \subsubsection{Nuisance Signal Correction}
