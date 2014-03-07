@@ -9,6 +9,7 @@
 \subsubsection{Volume Realignment}
 \subsubsection{Registration to Anatomical Image}
 \subsubsection{Nuisance Signal Correction}
+\text{physiological noise correction, wm/csf, gsr, motion, detrending}
 
 
 
@@ -43,25 +44,3 @@ CPAC provides the option to include parameters calulcated during volume realignm
 After calculating FD and DVARS, thresholds can be applied to censor the data. Selecting thresholds for Scrubbing is a trade-off. More stringent thresholds allow more complete removal of motion-contaminated data, and minimize motion-induced artifacts. Meanwhile, more stringent Scrubbing will also remove more data, which may increase the variability and decrease the test-retest reliability of the data. Commonly used thresholds are FD > 0.2 to 0.5 mm and DVARS > 0.3 to 0.5% of BOLD.
 
 IMPORTANT: Removing time points from a continuous time series (as is done during Scrubbing) disrupts the temporal structure of the data and precludes frequency-based analyses such as ALFF/fALFF. However, Scrubbing can effectively be used to minimize motion-related artifacts in seed-based correlation analyses (Power et al., 2011; 2012).}
-\\
-\\
-\begin{itemize}
-    \item Anatomical Preprocessing
-    \begin{itemize}
-        \item Basic preprocessing
-        \item Segmentation
-        \item Non-linear registration to template space
-    \end{itemize}
-    \item Functional Preprocessing
-    \begin{itemize}
-        \item Basic preprocessing, slice timing correction, and motion correction
-        \item Coregister mean functional to the anatomical
-        \item Denoising strategies
-        \begin{itemize}
-            \item Physiological noise correction
-            \item White matter, CSF
-            \item Global signal regression
-            \item motion correction
-        \end{itemize}
-    \end{itemize}
-\end{itemize}
