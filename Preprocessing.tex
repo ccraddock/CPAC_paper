@@ -16,8 +16,12 @@ CPAC runs volume realignment on all functional images during functional preproce
     \item{\textbf{Friston 24-Parameter Model} - The 6 motion parameters of the current volume and the preceeding volume, plus each of these values squared.}
 \end{itemize}
 
+\subsubsection{Regression of Motion Parameters}
+\text{Another approach to motion corretion is to regress-out the effects of motion when running statistical analysis. This is done by calculating motion parameters and including them in your General Linear Model (Fox et al., 2005; Weissenbacher et al., 2009).
 
-
+By default, CPAC will calculate and output the motion parameters used during volume realignment. Users can optionally enable the calculation of additional motion parameters, including Framewise Displacement (FD) and DVARS (as described below and in Power et al., 2011).
+\\
+\\
 \begin{itemize}
     \item Anatomical Preprocessing
     \begin{itemize}
