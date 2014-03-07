@@ -5,7 +5,7 @@ Reproduciblity.tex
 Preprocessing.tex
 Derivatives.tex
 Group Analysis.tex
+Quality Control.tex
 Validation.tex
 Usage.tex
-Quality Control.tex
 Conclusion.tex
