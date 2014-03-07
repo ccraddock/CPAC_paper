@@ -20,6 +20,18 @@ CPAC runs volume realignment on all functional images during functional preproce
 \text{Another approach to motion corretion is to regress-out the effects of motion when running statistical analysis. This is done by calculating motion parameters and including them in your General Linear Model (Fox et al., 2005; Weissenbacher et al., 2009).
 
 By default, CPAC will calculate and output the motion parameters used during volume realignment. Users can optionally enable the calculation of additional motion parameters, including Framewise Displacement (FD) and DVARS (as described below and in Power et al., 2011).}
+
+\subsubsection{Scrubbing}
+\text{The most effective way to ensure that your results are have not been influenced by spurious, motion-related noise is to remove volumes during which significant movement occurred. This is known as volume censoring, or Scrubbing. Power and colleagues (2011) proposed two measures to identify volumes contaminated by excessive motion; framewise displacement (FD) and DVARS:}
+\begin{itemize}
+    \item{FD is calculated from derivatives of the six rigid-body realignment parameters estimated during standard volume realignment, and is a compressed single index of the six realignment parameters.}
+    \item{DVARS is the root mean squared (RMS) change in BOLD signal from volume to volume (D referring to temporal derivative of time courses and VARS referring to RMS variance over voxels). DVARS is calculated by first differentiating the volumetric time series and then calculating the RMS signal change over the whole brain. This measure indexes the change rate of BOLD signal across the entire brain at each frame of data or, in other words, how much the intensity of a brain image changes relative to the previous time point.}
+\end{itemize}
+\text{Together, these two measures capture the head displacements and the brain-wide BOLD signal displacements from volume to volume over all voxels within the brain (Power et al., 2011).
+
+After calculating FD and DVARS, thresholds can be applied to censor the data. Selecting thresholds for Scrubbing is a trade-off. More stringent thresholds allow more complete removal of motion-contaminated data, and minimize motion-induced artifacts. Meanwhile, more stringent Scrubbing will also remove more data, which may increase the variability and decrease the test-retest reliability of the data. Commonly used thresholds are FD > 0.2 to 0.5 mm and DVARS > 0.3 to 0.5% of BOLD.
+
+IMPORTANT: Removing time points from a continuous time series (as is done during Scrubbing) disrupts the temporal structure of the data and precludes frequency-based analyses such as ALFF/fALFF. However, Scrubbing can effectively be used to minimize motion-related artifacts in seed-based correlation analyses (Power et al., 2011; 2012).}
 \\
 \\
 \begin{itemize}
