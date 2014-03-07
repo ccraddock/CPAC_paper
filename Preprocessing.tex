@@ -10,6 +10,23 @@
 \subsubsection{Registration to Anatomical Image}
 \subsubsection{Nuisance Signal Correction}
 
+Anatomical Preprocessing \\
+
+\begin{tabular}{| l | l |}
+	\hline
+	Step & Method  \\ \hline
+	Deoblique & 3drefit (Cox, 1996)  \\ \hline
+	Re-orient to RPI & 3dresample ( Cox, 1996) \\ \hline
+	Skull Strip & 3dSkullStrip (Cox, 1996) \\ \hline
+	Denormalize & 3dcalc (Cox, 1996) \\ \hline
+	Register to Template & FLIRT (Jenkinson and Smith, 2001) + FNIRT (Andersson et al., 2010) \\
+	(nonlinear) & ANTS (Avants et al., 2009)  \\ \hline
+	Tissue Segmentation & FAST ( Zhang et al., 2001)\\ 
+	\hline
+\end{tabular}
+\\
+\\
+
 Functional Preprocessing \\
 
 \begin{tabular}{| l | l | l | p{3.5cm} |}
